@@ -33,6 +33,10 @@ If you want to use you own PhantomJs executable - you can specify path to it via
 new hotrush\Webshotter\Webshot('/path/to/phantomjs');
 ```
 
+Example screenshot:
+
+[![example](github.png)](github.png)
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
