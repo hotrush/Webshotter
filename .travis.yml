@@ -17,8 +17,6 @@ matrix:
 before_install:
   - wget http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu52_52.1-3ubuntu0.4_amd64.deb
   - sudo dpkg -i libicu52_52.1-3ubuntu0.4_amd64.deb
-#  - sudo apt-get update
-#  - sudo apt-get -y install libicu52
 
 before_script:
   - composer self-update
