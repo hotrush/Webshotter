@@ -169,7 +169,7 @@ class Webshot
 
         ob_start();
 
-        require_once $this->templatePath;
+        require $this->templatePath;
 
         $template = ob_get_contents();
 
