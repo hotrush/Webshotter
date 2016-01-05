@@ -1,5 +1,5 @@
-[![Build Status](https://img.shields.io/travis/hotrush/webshotter/master.svg?style=flat-square)](https://travis-ci.org/hotrush/Webshotter)
-[![Latest Version](https://img.shields.io/packagist/v/hotrush/webshotter.svg?style=flat-square)](https://github.com/hotrush/webshotter/releases)
+[![Build Status](https://img.shields.io/travis/hotrush/Webshotter/master.svg?style=flat-square)](https://travis-ci.org/hotrush/Webshotter)
+[![Latest Version](https://img.shields.io/packagist/v/hotrush/Webshotter.svg?style=flat-square)](https://github.com/hotrush/webshotter/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/hotrush/webshotter.svg?style=flat-square)](https://packagist.org/packages/hotrush/webshotter)
 
