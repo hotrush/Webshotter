@@ -13,6 +13,18 @@ Take website's screenshots with PHP/PhantomJS and save them to PNG, JPG or PDF
 composer require hotrush/webshotter
 ```
 
+## Laravel installation
+
+After installing package via composer add a service provider to your config/app.php
+```
+// app/config/app.php
+
+'providers' => [
+    ...,
+    hotrush\Webshotter\WebshotServiceProvider::class
+];
+```
+
 ## Usage
 
 ```

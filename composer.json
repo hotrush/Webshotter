@@ -2,9 +2,10 @@
     "name": "hotrush/webshotter",
     "description": "Make screnshots of webpages with phantomjs",
     "homepage": "https://github.com/hotrush/webshotter",
-    "keywords": ["image", "gd", "imagick", "phantomjs", "laravel", "screenshot", "webshot", "webpage", "png", "pdf", "jpg"],
+    "keywords": ["image", "gd", "imagick", "phantomjs", "laravel", "lumen", "screenshot", "webshot", "webpage", "png", "pdf", "jpg"],
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "illuminate/support": "4.*|5.*"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8"
@@ -21,5 +22,8 @@
             "hotrush\\Webshotter\\": "src/hotrush/Webshotter"
         }
     },
+    "bin": [
+        "bin/phantomjs"
+    ],
     "minimum-stability": "stable"
 }
