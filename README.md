@@ -5,7 +5,9 @@
 
 # Webshotter
 
-Take website's screenshots with PHP/PhantomJS and save them to PNG, JPG or PDF
+Take website's screenshots with PHP/PhantomJS and save them to PNG, JPG or PDF.
+
+Also you can take a look at simple microservice with lumen and this package - [hotrush/Webshotter-microservice](https://github.com/hotrush/Webshotter-microservice).
 
 ## Installation
 
