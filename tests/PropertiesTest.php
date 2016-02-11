@@ -18,7 +18,7 @@ class PropertiesTest extends PHPUnit_Framework_TestCase
     {
         $webshot = new Webshot();
         $this->setExpectedException(
-            'Exception', 'Invalid width value'
+            'hotrush\Webshotter\Exception\InvalidDataException', 'Invalid width value'
         );
         $webshot->setWidth('foo');
         $webshot->setWidth(1000);
@@ -29,7 +29,7 @@ class PropertiesTest extends PHPUnit_Framework_TestCase
     {
         $webshot = new Webshot();
         $this->setExpectedException(
-            'Exception', 'Invalid height value'
+            'hotrush\Webshotter\Exception\InvalidDataException', 'Invalid height value'
         );
         $webshot->setHeight('foo');
         $webshot->setHeight(1000);
@@ -40,7 +40,7 @@ class PropertiesTest extends PHPUnit_Framework_TestCase
     {
         $webshot = new Webshot();
         $this->setExpectedException(
-            'Exception', 'Invalid url link'
+            'hotrush\Webshotter\Exception\InvalidDataException', 'Invalid url link'
         );
         $webshot->setUrl('foo-bar-url');
         $webshot->setUrl('https://github.com');
@@ -53,6 +53,14 @@ class PropertiesTest extends PHPUnit_Framework_TestCase
         $this->assertFalse(PHPUnit_Framework_Assert::readAttribute($webshot, 'fullPage'));
         $webshot->setFullPage(true);
         $this->assertTrue(PHPUnit_Framework_Assert::readAttribute($webshot, 'fullPage'));
+    }
+
+    public function testTimeoutProperty()
+    {
+        $webshot = new Webshot();
+        $this->assertEquals(30, PHPUnit_Framework_Assert::readAttribute($webshot, 'timeout'));
+        $webshot->setTimeout(10);
+        $this->assertEquals(10, PHPUnit_Framework_Assert::readAttribute($webshot, 'timeout'));
     }
 
     public function testTemplateRendering()

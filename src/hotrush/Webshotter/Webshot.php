@@ -2,7 +2,8 @@
 
 namespace hotrush\Webshotter;
 
-use Exception;
+use hotrush\Webshotter\Exception\TimeoutException;
+use hotrush\Webshotter\Exception\InvalidDataException;
 
 class Webshot
 {
@@ -49,6 +50,13 @@ class Webshot
     private $templatePath;
 
     /**
+     * Page load timeout in sec
+     *
+     * @var int
+     */
+    private $timeout;
+
+    /**
      * Webshot constructor.
      *
      * @param null $binPath
@@ -67,6 +75,7 @@ class Webshot
             $this->templatePath = realpath(dirname(__FILE__).'/../../views/webshotter.php');
         }
         $this->fullPage = false;
+        $this->timeout = 30;
 
         return $this;
     }
@@ -75,14 +84,14 @@ class Webshot
      * Set an url to take a shot
      *
      * @param $url
-     * @throws Exception
+     * @throws InvalidDataException
      * @return $this
      */
     public function setUrl($url)
     {
         if (!filter_var($url, FILTER_VALIDATE_URL))
         {
-            throw new Exception('Invalid url link');
+            throw new InvalidDataException('Invalid url link');
         }
 
         $this->url = $url;
@@ -95,13 +104,13 @@ class Webshot
      *
      * @param $width
      * @return $this
-     * @throws Exception
+     * @throws InvalidDataException
      */
     public function setWidth($width)
     {
         if (!is_numeric($width))
         {
-            throw new Exception('Invalid width value');
+            throw new InvalidDataException('Invalid width value');
         }
 
         $this->width = (int) $width;
@@ -114,13 +123,13 @@ class Webshot
      *
      * @param $height
      * @return $this
-     * @throws Exception
+     * @throws InvalidDataException
      */
     public function setHeight($height)
     {
         if (!is_numeric($height))
         {
-            throw new Exception('Invalid height value');
+            throw new InvalidDataException('Invalid height value');
         }
 
         $this->height = (int) $height;
@@ -143,6 +152,19 @@ class Webshot
     }
 
     /**
+     * Set timeout value in sec
+     *
+     * @param $timeout
+     * @return $this
+     */
+    public function setTimeout($timeout)
+    {
+        $this->timeout = (int) $timeout;
+
+        return $this;
+    }
+
+    /**
      * Render PhantomJS script template
      *
      * @param $filePath
@@ -154,7 +176,8 @@ class Webshot
             'url' => $this->url,
             'width' => $this->width,
             'height' => $this->height,
-            'fullPage' => $this->fullPage
+            'fullPage' => $this->fullPage,
+            'timeout' => $this->timeout * 1000, // convert into milliseconds
         ), $filePath);
     }
 
@@ -220,6 +243,7 @@ class Webshot
      * @param $fileName
      * @param $filePath
      * @param $extension
+     * @throws TimeoutException
      * @return string
      */
     private function save($fileName, $filePath, $extension)
@@ -234,6 +258,11 @@ class Webshot
         $cmd = escapeshellcmd("{$this->binPath} --ssl-protocol=any --ignore-ssl-errors=true ".$tempFileName);
         shell_exec($cmd);
         fclose($tempExecutable);
+
+        if (!file_exists($fullPath))
+        {
+            throw new TimeoutException('Page load timeout.');
+        }
 
         return $fullPath;
     }

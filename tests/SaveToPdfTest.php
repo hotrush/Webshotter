@@ -12,6 +12,7 @@ class SaveToPdfTest extends PHPUnit_Framework_TestCase
             ->setUrl('https://github.com')
             ->setWidth(1200)
             ->setHeight(800)
+            ->setTimeout(5)
             ->saveToPdf('github', $path);
         $this->assertFileExists($pdf);
     }
