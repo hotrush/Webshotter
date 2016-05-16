@@ -65,6 +65,7 @@ class Webshot
     public function __construct($binPath = null, $templatePath = null)
     {
 
+    	$this->binPath = $binPath;
         if ($binPath === null)
         {
             $this->binPath = realpath(dirname(__FILE__).'/../../../bin/phantomjs');
