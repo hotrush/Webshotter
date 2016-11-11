@@ -76,4 +76,12 @@ class PropertiesTest extends PHPUnit_Framework_TestCase
         $method->setAccessible(true);
         $this->assertEquals($mock, $method->invokeArgs($webshot, array('tests/tmp/github.png')));
     }
+
+    public function testTemplateProperty()
+    {
+        $path = realpath(dirname(__FILE__));
+        $templateFile = $path.'/template/webshotter.php';
+        $webshot = new Webshot(null, $templateFile);
+        $this->assertEquals($templateFile, PHPUnit_Framework_Assert::readAttribute($webshot, 'templatePath'));
+    }
 }

@@ -71,6 +71,7 @@ class Webshot
             $this->binPath = realpath(dirname(__FILE__).'/../../../bin/phantomjs');
         }
 
+        $this->templatePath = $templatePath;
         if ($templatePath === null)
         {
             $this->templatePath = realpath(dirname(__FILE__).'/../../views/webshotter.php');
