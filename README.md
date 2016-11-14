@@ -11,6 +11,7 @@ Also you can take a look at simple microservice with lumen and this package - [h
 
 ## Changelog
 ***0.1.5*** - custom ```$templatePath``` fixed, thanks to [mizansyed](https://github.com/mizansyed)
+
 ***0.1.3*** - added ```timeout``` property that allow to limit page load timeout (using [onResourceTimeout](http://phantomjs.org/api/webpage/handler/on-resource-timeout.html) phantomjs feature). If timeout reached ```TimeoutException``` will be thrown.
 
 ## Installation
