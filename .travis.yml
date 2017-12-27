@@ -10,12 +10,11 @@ php:
 
 matrix:
     allow_failures:
-        - php: 7.0
         - php: nightly
         - php: hhvm
 
 before_install:
-  - wget http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu52_52.1-3ubuntu0.4_amd64.deb
+  - wget http://security.ubuntu.com/ubuntu/pool/main/i/icu/libicu52_52.1-3ubuntu0.7_amd64.deb
   - sudo dpkg -i libicu52_52.1-3ubuntu0.4_amd64.deb
 
 before_script:
