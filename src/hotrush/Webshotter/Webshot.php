@@ -57,6 +57,20 @@ class Webshot
     private $timeout;
 
     /**
+     * Wait while all page images will be loaded
+     *
+     * @var bool
+     */
+    private $waitForImages;
+
+    /**
+     * Images waiting timeout
+     *
+     * @var int
+     */
+    private $imagesLoadingTimeout;
+
+    /**
      * Webshot constructor.
      *
      * @param null $binPath
@@ -78,6 +92,8 @@ class Webshot
         }
         $this->fullPage = false;
         $this->timeout = 30;
+        $this->waitForImages = false;
+        $this->imagesLoadingTimeout = 30;
 
         return $this;
     }
@@ -167,6 +183,31 @@ class Webshot
     }
 
     /**
+     * Let webshotter wait while images will load
+     *
+     * @return $this
+     */
+    public function waitForImages()
+    {
+        $this->waitForImages = true;
+
+        return $this;
+    }
+
+    /**
+     * Set images loading timeout
+     *
+     * @param $timeout
+     * @return $this
+     */
+    public function setImagesLoadingTimeout($timeout)
+    {
+        $this->imagesLoadingTimeout = (int) $timeout;
+
+        return $this;
+    }
+
+    /**
      * Render PhantomJS script template
      *
      * @param $filePath
@@ -180,6 +221,8 @@ class Webshot
             'height' => $this->height,
             'fullPage' => $this->fullPage,
             'timeout' => $this->timeout * 1000, // convert into milliseconds
+            'waitForImages' => $this->waitForImages,
+            'imagesLoadingTimeout' => $this->imagesLoadingTimeout * 1000, // convert into milliseconds
         ), $filePath);
     }
 

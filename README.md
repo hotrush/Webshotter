@@ -10,6 +10,8 @@ Take website's screenshots with PHP/PhantomJS and save them to PNG, JPG or PDF.
 Also you can take a look at simple microservice with lumen and this package - [hotrush/Webshotter-microservice](https://github.com/hotrush/Webshotter-microservice).
 
 ## Changelog
+***0.1.6*** - added ```waitForImages()``` and ```imagesLoadingTimeout```
+
 ***0.1.5*** - custom ```$templatePath``` fixed, thanks to [mizansyed](https://github.com/mizansyed)
 
 ***0.1.3*** - added ```timeout``` property that allow to limit page load timeout (using [onResourceTimeout](http://phantomjs.org/api/webpage/handler/on-resource-timeout.html) phantomjs feature). If timeout reached ```TimeoutException``` will be thrown.
@@ -42,6 +44,8 @@ $jpg = $webshot
     ->setHeight(800)
     ->setTimeout(5) // set timeout in seconds, 30 seconds default
     ->setFullPage(true) // set to true to get full page screenshot (width/height will be used for viewport only)
+    ->waitForImages() // wait when all images will load
+    ->setImagesLoadingTimeout() // images loading timeout, will failt if not loaded
     ->saveToPng('github', $path);
 ```
 

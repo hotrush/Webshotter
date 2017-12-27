@@ -3,11 +3,10 @@ page.settings.javascriptEnabled = true;
 page.onResourceTimeout = function(request) {
     phantom.exit();
 };
-page.settings.resourceTimeout = <?php echo $timeout; ?>;
+page.settings.resourceTimeout = 30000;
 
-page.open('<?php echo $url; ?>', function () {
-    <?php if ($waitForImages) { ?>
-        waitFor(function() {
+page.open('https://github.com', function () {
+            waitFor(function() {
             return page.evaluate(function() {
                 for(var i = 0; i < document.images.length; i++) {
                     if (!document.images[i].complete) {
@@ -19,28 +18,19 @@ page.open('<?php echo $url; ?>', function () {
         }, function() {
             savePage();
             phantom.exit();
-        }, <?php echo $imagesLoadingTimeout; ?>);
-    <?php } else { ?>
-        savePage();
-        phantom.exit();
-    <?php } ?>
-});
+        }, 30000);
+    });
 
 function savePage() {
     page.viewportSize = {
-        width: <?php echo $width; ?>,
-        height: <?php echo $height; ?>
-    };
-    <?php if (!$fullPage) { ?>
-        page.clipRect = {
-            width: <?php echo $width; ?>,
-            height: <?php echo $height; ?>
-        }
-    <?php } ?>
-    page.render('<?php echo $path; ?>');
+        width: 1200,
+        height: 800    };
+            page.clipRect = {
+            width: 1200,
+            height: 800        }
+        page.render('tests/tmp/github.png');
 }
 
-<?php if ($waitForImages) { ?>
 function waitFor(testFx, onReady, timeOutMillis) {
     var maxtimeOutMillis = timeOutMillis ? timeOutMillis : 3000,
         start = new Date().getTime(),
@@ -60,4 +50,4 @@ function waitFor(testFx, onReady, timeOutMillis) {
                 }
             }
         }, 250);
-};<?php } ?>
+};
