@@ -18,4 +18,18 @@ class TimeoutTest extends PHPUnit_Framework_TestCase
             ->setTimeout(5)
             ->saveToPng('delay', $path);
     }
+
+    public function testImagesTimeout()
+    {
+        $path = realpath(dirname(__FILE__).'/../tests/tmp/');
+        $webshot = new Webshot();
+        $webshot
+            ->setUrl('https://github.com')
+            ->setWidth(1200)
+            ->setHeight(800)
+            ->setTimeout(5)
+            ->waitForImages()
+            ->setImagesLoadingTimeout(10)
+            ->saveToPng('imagestimeout', $path);
+    }
 }

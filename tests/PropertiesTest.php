@@ -63,6 +63,22 @@ class PropertiesTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(10, PHPUnit_Framework_Assert::readAttribute($webshot, 'timeout'));
     }
 
+    public function testImagesWaitProperty()
+    {
+        $webshot = new Webshot();
+        $this->assertEquals(false, PHPUnit_Framework_Assert::readAttribute($webshot, 'waitForImages'));
+        $webshot->waitForImages();
+        $this->assertEquals(true, PHPUnit_Framework_Assert::readAttribute($webshot, 'waitForImages'));
+    }
+
+    public function testImagesTimeoutProperty()
+    {
+        $webshot = new Webshot();
+        $this->assertEquals(30, PHPUnit_Framework_Assert::readAttribute($webshot, 'imagesLoadingTimeout'));
+        $webshot->setImagesLoadingTimeout(10);
+        $this->assertEquals(10, PHPUnit_Framework_Assert::readAttribute($webshot, 'imagesLoadingTimeout'));
+    }
+
     public function testTemplateRendering()
     {
         $webshot = new Webshot();
@@ -71,6 +87,21 @@ class PropertiesTest extends PHPUnit_Framework_TestCase
             ->setWidth(1200)
             ->setHeight(800);
         $mock = file_get_contents(realpath(dirname(__FILE__).'/../tests/data/template.php'));
+        $reflection = new ReflectionClass('hotrush\Webshotter\Webshot');
+        $method = $reflection->getMethod('renderTemplate');
+        $method->setAccessible(true);
+        $this->assertEquals($mock, $method->invokeArgs($webshot, array('tests/tmp/github.png')));
+    }
+
+    public function testTemplateRenderingWithImagesWait()
+    {
+        $webshot = new Webshot();
+        $webshot
+            ->setUrl('https://github.com')
+            ->setWidth(1200)
+            ->setHeight(800)
+            ->waitForImages();
+        $mock = file_get_contents(realpath(dirname(__FILE__).'/../tests/data/template_images.php'));
         $reflection = new ReflectionClass('hotrush\Webshotter\Webshot');
         $method = $reflection->getMethod('renderTemplate');
         $method->setAccessible(true);

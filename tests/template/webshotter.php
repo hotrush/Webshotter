@@ -11,10 +11,10 @@ page.open('<?php echo $url; ?>', function () {
         height: <?php echo $height; ?>
     };
     <?php if (!$fullPage) { ?>
-    page.clipRect = {
-        width: <?php echo $width; ?>,
-        height: <?php echo $height; ?>
-    }
+        page.clipRect = {
+            width: <?php echo $width; ?>,
+            height: <?php echo $height; ?>
+        }
     <?php } ?>
     page.render('<?php echo $path; ?>');
     phantom.exit();
